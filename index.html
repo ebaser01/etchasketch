@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id= "sketcharea">
+
+    </div>
+
+    <div id='buttons'>
+        <div id='reset'>
+        <button type="button" id="resetButton">Clean the board</button>
+        </div>
+        <div class="slidecontainer">
+            <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+          </div>
+        <div id='sliderValue'></div>
+        <div id="colordiv">
+        <div id="colors">
+            <button id="grayscale" class="colorButton">
+                Grayscale
+            </button>
+                
+            <button id="rainbow" class="colorButton">
+                Rainbow
+            </button>
+
+            <div class="solidColors">
+            <button id="solid" >
+                Solid
+            </button>
+            <input type="color" id="colorValue" >
+            </div>
+            
+            
+        </div>
+    </div>
+    </div>
+</body>
+<script>
+    const cnt = document.getElementById('sketcharea');
+    var currentColor = 0;
+    
+    function createGrid(n){
+        cnt.innerHTML = '';
+        cnt.style.gridTemplateRows = `repeat(${n}, 1fr)`;
+        cnt.style.gridTemplateColumns = `repeat(${n}, 1fr)`;
+        
+    for(let i=0 ; i<n*n; i++){
+        
+        var innerSquares= document.createElement('div');
+        innerSquares.className = 'pixel';
+        /*innerSquares.style.backgroundColor= getRandomColor();*/
+        cnt.appendChild(innerSquares);
+        
+    }
+    
+    }
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+     }
+         return color;
+    }
+    function updateColor(){
+        if(currentColor==0){
+            let currentOpacity = Number(this.style.backgroundColor.slice(-4, -1));
+                if (currentOpacity <= 0.9) {
+                    this.style.backgroundColor = `rgba(0, 0, 0, ${currentOpacity + 0.1})`;
+                   
+                }
+            } 
+        else if(currentColor==1){
+        
+        this.style.backgroundColor = getRandomColor();
+
+
+        }
+        else{
+            this.style.backgroundColor = currentColor;    
+        }
+    }
+    function cleanBoard(){
+        const sqrs = document.querySelectorAll('.pixel');
+        sqrs.forEach(box => box.style.backgroundColor = 'white');
+    }
+
+   
+
+    
+    function changeColor(){
+        
+        if(this.id == 'grayscale'){
+            
+            currentColor = 0;
+        }
+        else if(this.id == 'rainbow'){
+            
+            currentColor = 1;
+        }
+        else if(this.id == 'solid'){
+           
+            currentColor = document.getElementById('colorValue').value;
+        }
+
+    }
+   
+    createGrid(50);
+    var sqrs = document.querySelectorAll('.pixel');
+    sqrs.forEach(box => box.addEventListener('mouseover',updateColor));
+    
+    const resetButton = document.getElementById('resetButton');
+
+    resetButton.addEventListener('click', cleanBoard);
+
+    var slider = document.getElementById("myRange");
+    var output = document.getElementById("sliderValue");
+    output.innerHTML = slider.value; // Display the default slider value
+
+// Update the current slider value (each time you drag the slider handle)
+    slider.onchange = function() {
+    
+    cleanBoard();
+    createGrid(this.value);
+    sqrs = document.querySelectorAll('.pixel');
+    sqrs.forEach(box => box.addEventListener('mouseover',updateColor));
+    
+    }
+    slider.oninput = function(){
+        output.innerHTML = this.value;
+    }
+
+    const colorButtons = document.querySelectorAll('.colorButton');
+    colorButtons.forEach(box => box.addEventListener('click',changeColor));
+
+    const solidButton = document.getElementById('solid');
+    solidButton.addEventListener('click',changeColor);
+    
+</script>
+</html>

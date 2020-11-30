@@ -1,0 +1,112 @@
+#sketcharea{
+margin: auto;
+border: 2px solid black;
+border-bottom: 0;
+width: 480px;
+height: 480px;
+display: grid;
+
+
+}
+.pixel{
+    
+    height: 100%;
+    width: 100%;
+}
+.buttons{
+    width: 100%;
+    
+}
+#reset{
+    display: flex;
+    justify-content: center;
+    margin-top: -1px;
+}
+#resetButton{
+    width: 484px;
+    height: auto;
+}
+.slidecontainer {
+    width: 100%; /* Width of the outside container */
+    display: flex;
+    justify-content: center;
+}
+.slider {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 480px; /* Full-width */
+    height: 15px; /* Specified height */
+    border-radius: 5px;
+    background: #d3d3d3; /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+    margin-top: 10px;
+    border-radius: 4px;
+}
+.slider:hover {
+    opacity: 1; /* Fully shown on mouse-over */
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 15px; /* Set a specific slider handle width */
+  height: 15px; /* Slider handle height */
+  border-radius: 50%;
+  background: black; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: red; /* Green background */
+  border-radius: 50%;
+  cursor: pointer; /* Cursor on hover */
+}
+#sliderValue{
+    text-align: center;
+    margin-top: 3px;
+    padding-right: 7px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+#colordiv{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+#colors{
+    max-width: 480px;
+    height: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.colorButton{
+    margin: 2px;
+    width: 120px;
+    height: 100%;
+}
+.solidColors{
+    margin-top: 2px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.solidColors button{
+    margin: 2px;
+    height: 100%;
+    width: 100px;
+    padding: 0;
+    
+}
+.solidColors input{
+    padding: 0px;
+    margin: 2px;
+    height: 30px;
+    width: 30px;
+    border: none;
+    
+}
